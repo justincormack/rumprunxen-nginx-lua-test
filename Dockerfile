@@ -10,4 +10,4 @@ RUN \
   genisoimage -l -r -o etc.iso etc && \
   genisoimage -l -r -o data.iso data
  
-CMD rumprun -d -i -W xennet0,inet,dhcp -b /etc,etc.iso -b /data,data.iso xen /usr/local/bin/nginx -- -c /data/conf/nginx.conf
+CMD rumprun xen -d -i -W xennet0,inet,dhcp -b etc.iso,/etc -b data.iso,/data /usr/local/bin/nginx -- -c /data/conf/nginx.conf
