@@ -1,6 +1,4 @@
-# Simple example with rump-nginx-lua
-
-FROM justincormack/rump-nginx-lua
+FROM justincormack/rumprunxen-nginx-lua
 
 MAINTAINER Justin Cormack
 
@@ -8,10 +6,8 @@ COPY . /usr/src/rump-nginx-lua-test
 
 WORKDIR /usr/src/rump-nginx-lua-test
 
-ENV SUDO_UID=1000
-
-RUN ./build.sh
-
-ENV RUMP_VERBOSE=1
-
-CMD rexec nginx -nx -ro fs.img -rw ${INTERFACE} -- -c /data/conf/nginx.conf
+RUN \
+  genisoimage -l -r -o etc.iso etc && \
+  genisoimage -l -r -o data.iso data
+ 
+CMD rumprun -d -i -W xennet0,inet,dhcp -b /etc,etc.iso -b /data,data.iso xen /usr/local/bin/nginx -- -c /data/conf/nginx.conf
