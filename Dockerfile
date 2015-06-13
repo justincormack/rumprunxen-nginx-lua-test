@@ -1,6 +1,6 @@
-FROM justincormack/rumprunxen-nginx-lua
+FROM justincormack/rumprun-nginx-lua
 
-MAINTAINER Justin Cormack
+MAINTAINER Justin Cormack <justin@specialbusservice.com>
 
 COPY . /usr/src/rump-nginx-lua-test
 
